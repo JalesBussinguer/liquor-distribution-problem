@@ -6,5 +6,8 @@ SHOW liquor_sales;
 
 describe liquor_sales;
 
-SELECT "Store Location" from liquor_sales;
+FROM liquor_sales SELECT "Store Location";
 
+FROM liquor_sales SELECT regexp_extract("Store Location", '\(.*\)', 0) AS coordinates;
+
+ALTER TABLE liquor_sales ADD COLUMN coordinates STRING;
