@@ -8,6 +8,7 @@ SELECT "Store Location" FROM liquor_sales LIMIT 10;
 
 describe liquor_sales;
 
+
 CREATE TABLE points_geom AS
 SELECT
     *,
@@ -19,11 +20,11 @@ FROM (
     SELECT
         *,
         CASE
-            WHEN SUBSTRING(coordinates, 1, POSITION(', ' IN coordinates) - 1) ~ '^-?[0-9]*\.?[0-9]+$' THEN CAST(SUBSTRING(coordinates, 1, POSITION(', ' IN coordinates) - 1) AS NUMERIC(18,7))
+            WHEN SUBSTRING(coordinates, 1, POSITION(', ' IN coordinates) - 1) ~ '^-?[0-9]*\.?[0-9]+$' THEN CAST(SUBSTRING(coordinates, 1, POSITION(', ' IN coordinates) - 1) AS NUMERIC(18,4))
             ELSE NULL
         END AS y,
         CASE
-            WHEN SUBSTRING(coordinates, POSITION(', ' IN coordinates) + 2) ~ '^-?[0-9]*\.?[0-9]+$' THEN CAST(SUBSTRING(coordinates, POSITION(', ' IN coordinates) + 2) AS NUMERIC(18, 7))
+            WHEN SUBSTRING(coordinates, POSITION(', ' IN coordinates) + 2) ~ '^-?[0-9]*\.?[0-9]+$' THEN CAST(SUBSTRING(coordinates, POSITION(', ' IN coordinates) + 2) AS NUMERIC(18,4))
             ELSE NULL
         END AS x
     FROM (
