@@ -8,7 +8,6 @@ SELECT "Store Location" FROM liquor_sales LIMIT 10;
 
 describe liquor_sales;
 
-
 CREATE TABLE points_geom AS
 SELECT
     *,

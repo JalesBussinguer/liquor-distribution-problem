@@ -4,6 +4,8 @@ CREATE TABLE liquor_sales AS SELECT * FROM 'data\iowa_liquor_sales.csv';
 
 describe liquor_sales;
 
+SELECT * FROM liquor_sales LIMIT 10;
+
 CREATE TABLE lojas (
 
     loja_id INT PRIMARY KEY,
@@ -77,3 +79,4 @@ CREATE TABLE fato_vendas (
     
 );
 
+describe fato_vendas;
