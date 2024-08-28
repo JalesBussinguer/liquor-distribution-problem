@@ -3,3 +3,5 @@ data/iowa_liquor_sales.csv
 first_view_duck.geojson
 second_view_duck.geojson
 data/iowa_liquor_sales_ETL_ready.csv
+data/iowa_liquor_sales_ETL_OK.csv
+data/iowa_liquor_sales_with_geoms.csv

@@ -1,10 +1,13 @@
+PRAGMA threads=10;
+PRAGMA max_temp_directory_size='10GiB';
+
 LOAD spatial;
 
-CREATE TABLE liquor_sales AS SELECT * FROM 'data\iowa_liquor_sales.csv';
+CREATE TABLE liquor_sales AS SELECT * FROM 'data\iowa_liquor_sales_ETL_OK.csv';
 
-SELECT * FROM liquor_sales LIMIT 10;
+SELECT * FROM liquor_sales LIMIT 20;
 
-SELECT "Store Location" FROM liquor_sales LIMIT 10;
+SELECT STORE_LOCATION FROM liquor_sales LIMIT 10;
 
 describe liquor_sales;
 
@@ -30,9 +33,9 @@ FROM (
         SELECT
             *,
             SUBSTRING(
-                "Store Location",
-                POSITION('(' IN "Store Location") + 1,
-                POSITION(')' IN "Store Location") - POSITION('(' IN "Store Location") - 1
+                STORE_LOCATION,
+                POSITION('(' IN STORE_LOCATION) + 1,
+                POSITION(')' IN STORE_LOCATION) - POSITION('(' IN STORE_LOCATION) - 1
             ) AS coordinates
         FROM liquor_sales
     ) AS temp_coordinates
@@ -54,6 +57,8 @@ WHERE geom IS NULL;
 SELECT COUNT(geom) from points_geom;
 
 SELECT DISTINCT ON (geom) * FROM points_geom LIMIT 10;
+
+COPY (SELECT * FROM points_geom) TO 'data/iowa_liquor_sales_ready.csv' WITH (HEADER, DELIMITER ',');
 
 COPY (SELECT DISTINCT ON (geom) * FROM points_geom) TO 'test03_duck.geojson'
 WITH (FORMAT GDAL, DRIVER 'GeoJSON');
